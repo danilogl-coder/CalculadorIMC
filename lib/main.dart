@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
   TextEditingController heightController = TextEditingController();
 
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  
 
   String _infoText = "Informe seus dados!";
 
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> {
 
     setState(() {
       _infoText = "Informe seus dados";
+      
     });
   }
 
@@ -94,7 +96,7 @@ class _HomeState extends State<Home> {
                   style: const TextStyle(color: Colors.green, fontSize: 25),
                   controller: weightController, //<- Controlador Weight
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Insira seu Peso !";
                     }
                   }),
@@ -109,7 +111,7 @@ class _HomeState extends State<Home> {
                 style: const TextStyle(color: Colors.green, fontSize: 25),
                 controller: heightController, //<- Controlador Height
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value!.isEmpty) {
                     return "insira sua Altura!";
                   }
                 },
@@ -121,8 +123,8 @@ class _HomeState extends State<Home> {
                   child: ElevatedButton(
                     // <------ BOTÃO
                     onPressed: () {
-                      if (_formkey.currentState?.validate() ?? false) {
-                        _calculate;
+                      if (_formkey.currentState!.validate()) {
+                        _calculate();
                       }
                     }, //<-- Função calcular
                     child: Text('Calcular',
